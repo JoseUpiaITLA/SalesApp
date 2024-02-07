@@ -27,7 +27,7 @@ namespace SalesApp.Infraestructure.Dao
             DataResult result = new DataResult();
             try
             {
-                if (this.Exists(entity.Descripcion))
+                if (this.Exists(entity.Gestion))
                     throw new CustomException("La NumeroCorrelativo se encuentra registrado.");
             }
             catch (Exception ex)

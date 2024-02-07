@@ -27,7 +27,7 @@ namespace SalesApp.Infraestructure.Dao
             DataResult result = new DataResult();
             try
             {
-                if (this.Exists(entity.Descripcion))
+                if (this.Exists(""))
                     throw new CustomException("La RolMenu se encuentra registrado.");
             }
             catch (Exception ex)
