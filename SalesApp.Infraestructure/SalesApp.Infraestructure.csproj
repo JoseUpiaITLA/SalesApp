@@ -8,9 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Dao\" />
-    <Folder Include="Exceptions\" />
-    <Folder Include="Interfaces\" />
+    <ProjectReference Include="..\SalesApp.Domain\SalesApp.Domain.csproj" />
   </ItemGroup>
 
 </Project>
