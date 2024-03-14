@@ -3,7 +3,7 @@ using SalesApp.Infraestructure.Core;
 
 namespace SalesApp.Infraestructure.Interfaces
 {
-    public interface IRolDb : IDaoBase<Rol>
+    public interface IRolDb : IDaoBase<Rol, int>
     {
     }
 }

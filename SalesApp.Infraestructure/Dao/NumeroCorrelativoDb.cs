@@ -8,7 +8,7 @@ using SalesApp.Infraestructure.Interfaces;
 
 namespace SalesApp.Infraestructure.Dao
 {
-    public class NumeroCorrelativoDb : DaoBase<NumeroCorrelativo>, INumeroCorrelativoDb
+    public class NumeroCorrelativoDb : DaoBase<NumeroCorrelativo, int>, INumeroCorrelativoDb
     {
         private readonly SaleContext _saleContext;
         private readonly ILogger<NumeroCorrelativoDb> _logger;
@@ -18,11 +18,6 @@ namespace SalesApp.Infraestructure.Dao
             this._saleContext = saleContext;
             this._logger = logger;
             this._configuration = configuration;
-        }
-
-        public override List<NumeroCorrelativo> GetAll()
-        {
-            return base.GetEntitiesWithFilters(e => !e.Eliminado);
         }
 
         public override DataResult Save(NumeroCorrelativo entity)
@@ -56,9 +51,6 @@ namespace SalesApp.Infraestructure.Dao
                 NumeroCorrelativoToUpdate.CantidadDigitos = entity.CantidadDigitos;
                 NumeroCorrelativoToUpdate.Gestion = entity.Gestion;
                 NumeroCorrelativoToUpdate.FechaActualizacion = entity.FechaActualizacion;
-                NumeroCorrelativoToUpdate.IdUsuarioMod = entity.IdUsuarioMod;
-                NumeroCorrelativoToUpdate.EsActivo = entity.EsActivo;
-                NumeroCorrelativoToUpdate.FechaMod = entity.FechaMod;
 
                 base.Update(NumeroCorrelativoToUpdate);
                 base.Commit();
@@ -69,7 +61,7 @@ namespace SalesApp.Infraestructure.Dao
                 result.Message = $"Ocurrio el siguiente error: {ex.Message}";
                 this._logger.LogError(result.Message, ex.ToString());
             }
-            return base.Update(entity);
+            return result;
         }
     }
 }

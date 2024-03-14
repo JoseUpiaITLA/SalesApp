@@ -4,7 +4,7 @@ using SalesApp.Infraestructure.Context;
 
 namespace SalesApp.Infraestructure.Core
 {
-    public abstract class DaoBase<Entity> : IDaoBase<Entity> where Entity : BaseEntity, new()
+    public abstract class DaoBase<Entity, T> : IDaoBase<Entity, T> where Entity : BaseEntity<T>, new()
     {
         private readonly SaleContext _saleContext;
         private DbSet<Entity> entities;
@@ -46,9 +46,9 @@ namespace SalesApp.Infraestructure.Core
             return this.entities.Where(filtter).ToList();
         }
 
-        public virtual Entity GetById(int id)
+        public virtual Entity GetById(T id)
         {
-            return this.entities.First(e => e.Id == id);
+            return this.entities.First(e => e.Id.Equals(id));
         }
 
         public virtual bool Exists(Func<Entity, bool> filter)

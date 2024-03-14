@@ -1,7 +1,9 @@
 ﻿
+using SalesApp.Domain.Core;
+
 namespace SalesApp.Domain.Entities
 {
-    public class NumeroCorrelativo : Core.AuditableEntity
+    public class NumeroCorrelativo : BaseEntity<int>
     {
         public int? UltimoNumero { get; set; }
         public int? CantidadDigitos { get; set; }

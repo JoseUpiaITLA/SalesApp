@@ -10,6 +10,17 @@ builder.Services.AddDbContext<SaleContext>(options
 
 // Add services to the container.
 builder.Services.AddTransient<ICategoriaDb, CategoriaDb>();
+builder.Services.AddTransient<IConfiguracionDb, ConfiguracionDb>();
+builder.Services.AddTransient<IDetalleVentaDb, DetalleVentaDb>();
+builder.Services.AddTransient<IMenuDb, MenuDb>();
+builder.Services.AddTransient<INegocioDb, NegocioDb>();
+builder.Services.AddTransient<INumeroCorrelativoDb, NumeroCorrelativoDb>();
+builder.Services.AddTransient<IProductoDb, ProductoDb>();
+builder.Services.AddTransient<IRolDb, RolDb>();
+builder.Services.AddTransient<IRolMenuDb, RolMenuDb>();
+builder.Services.AddTransient<ITipoDocumentoVentaDb, TipoDocumentoVentaDb>();
+builder.Services.AddTransient<IUsuarioDb, UsuarioDb>();
+builder.Services.AddTransient<IVentaDb, VentaDb>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

@@ -1,7 +1,7 @@
 ﻿
 namespace SalesApp.Domain.Core
 {
-    public abstract class AuditableEntity : BaseEntity
+    public abstract class AuditableEntity : BaseEntity<int>
     {
         public bool EsActivo { get; set; }
         public DateTime FechaRegistro { get; set; }

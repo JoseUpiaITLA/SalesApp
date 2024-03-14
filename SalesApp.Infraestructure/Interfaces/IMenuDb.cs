@@ -3,7 +3,7 @@ using SalesApp.Infraestructure.Core;
 
 namespace SalesApp.Infraestructure.Interfaces
 {
-    public interface IMenuDb : IDaoBase<Menu>
+    public interface IMenuDb : IDaoBase<Menu, int>
     {
     }
 }

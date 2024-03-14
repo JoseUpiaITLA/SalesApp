@@ -3,7 +3,7 @@ using SalesApp.Infraestructure.Core;
 
 namespace SalesApp.Infraestructure.Interfaces
 {
-    public interface ICategoriaDb : IDaoBase<Categoria>
+    public interface ICategoriaDb : IDaoBase<Categoria, int>
     {
     }
 }

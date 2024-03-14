@@ -1,8 +1,11 @@
 ﻿
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace SalesApp.Domain.Entities
 {
-    public class DetalleVenta : Core.BaseEntity
+    public class DetalleVenta : Core.BaseEntity<int>
     {
+        [ForeignKey("Venta")]
         public int? IdVenta { get; set; } // FK
         public Venta? Venta { get; set; }
         public int? IdProducto { get; set; }

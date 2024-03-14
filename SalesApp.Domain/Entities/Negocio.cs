@@ -1,7 +1,7 @@
 ﻿
 namespace SalesApp.Domain.Entities
 {
-    public class Negocio : Core.AuditableEntity
+    public class Negocio : Core.AuditableNoActivationEntity
     {
         public string? UrlLogo { get; set; }
         public string? NombreLogo { get; set; }

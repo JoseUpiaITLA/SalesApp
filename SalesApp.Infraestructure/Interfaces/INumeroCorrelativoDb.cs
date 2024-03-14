@@ -3,7 +3,7 @@ using SalesApp.Infraestructure.Core;
 
 namespace SalesApp.Infraestructure.Interfaces
 {
-    public interface INumeroCorrelativoDb : IDaoBase<NumeroCorrelativo>
+    public interface INumeroCorrelativoDb : IDaoBase<NumeroCorrelativo, int>
     {
     }
 }

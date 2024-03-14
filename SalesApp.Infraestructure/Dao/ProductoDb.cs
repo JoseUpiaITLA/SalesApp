@@ -8,7 +8,7 @@ using SalesApp.Infraestructure.Interfaces;
 
 namespace SalesApp.Infraestructure.Dao
 {
-    public class ProductoDb : DaoBase<Producto>, IProductoDb
+    public class ProductoDb : DaoBase<Producto, int>, IProductoDb
     {
         private readonly SaleContext _saleContext;
         private readonly ILogger<ProductoDb> _logger;
@@ -73,7 +73,7 @@ namespace SalesApp.Infraestructure.Dao
                 result.Message = $"Ocurrio el siguiente error: {ex.Message}";
                 this._logger.LogError(result.Message, ex.ToString());
             }
-            return base.Update(entity);
+            return result;
         }
     }
 }

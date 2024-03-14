@@ -1,4 +1,6 @@
 ﻿
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace SalesApp.Domain.Entities
 {
     public class Producto : Core.AuditableEntity
@@ -6,6 +8,7 @@ namespace SalesApp.Domain.Entities
         public string? CodigoBarra { get; set; }
         public string? Marca { get; set; }
         public string? Descripcion { get; set; }
+        [ForeignKey("Categoria")]
         public int? IdCategoria { get; set; } // FK
         public Categoria? Categoria { get; set; }
         public int? Stock { get; set; }

@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Sales.Api.Models.Categoria;
 using SalesApp.Infraestructure.Core;
 using SalesApp.Infraestructure.Interfaces;
@@ -40,13 +39,11 @@ namespace Sales.Api.Controllers
         {
             DataResult result = this._categoriaDb.Update(new SalesApp.Domain.Entities.Categoria
             {
+                Id = updateModel.Id,
                 Descripcion = updateModel.Descripcion,
                 EsActivo = updateModel.EsActivo,
                 FechaMod = updateModel.FechaMod,
-                IdUsuarioMod = updateModel.IdUsuarioMod,
-                IdUsuarioElimino = updateModel.IdUsuarioElimino,
-                FechaElimino = updateModel.FechaElimino,
-                Eliminado = updateModel.Eliminado,
+                IdUsuarioMod = updateModel.IdUsuarioMod
             });
             return Ok(result);
         }

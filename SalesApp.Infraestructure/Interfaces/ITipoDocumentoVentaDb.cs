@@ -3,7 +3,7 @@ using SalesApp.Infraestructure.Core;
 
 namespace SalesApp.Infraestructure.Interfaces
 {
-    public interface ITipoDocumentoVentaDb : IDaoBase<TipoDocumentoVenta>
+    public interface ITipoDocumentoVentaDb : IDaoBase<TipoDocumentoVenta, int>
     {
     }
 }

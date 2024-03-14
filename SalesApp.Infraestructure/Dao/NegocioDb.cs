@@ -8,7 +8,7 @@ using SalesApp.Infraestructure.Interfaces;
 
 namespace SalesApp.Infraestructure.Dao
 {
-    public class NegocioDb : DaoBase<Negocio>, INegocioDb
+    public class NegocioDb : DaoBase<Negocio, int>, INegocioDb
     {
         private readonly SaleContext _saleContext;
         private readonly ILogger<NegocioDb> _logger;
@@ -62,7 +62,6 @@ namespace SalesApp.Infraestructure.Dao
                 NegocioToUpdate.PorcentajeImpuesto = entity.PorcentajeImpuesto;
                 NegocioToUpdate.SimboloMoneda = entity.SimboloMoneda;
                 NegocioToUpdate.IdUsuarioMod = entity.IdUsuarioMod;
-                NegocioToUpdate.EsActivo = entity.EsActivo;
                 NegocioToUpdate.FechaMod = entity.FechaMod;
 
                 base.Update(NegocioToUpdate);
@@ -74,7 +73,7 @@ namespace SalesApp.Infraestructure.Dao
                 result.Message = $"Ocurrio el siguiente error: {ex.Message}";
                 this._logger.LogError(result.Message, ex.ToString());
             }
-            return base.Update(entity);
+            return result;
         }
     }
 }
