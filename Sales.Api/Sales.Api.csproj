@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SalesApp.AppServices\SalesApp.AppServices.csproj" />
     <ProjectReference Include="..\SalesApp.Infraestructure\SalesApp.Infraestructure.csproj" />
   </ItemGroup>
 

@@ -1,10 +1,12 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using SalesApp.Domain.Entities;
 using SalesApp.Infraestructure.Context;
 using SalesApp.Infraestructure.Core;
 using SalesApp.Infraestructure.Exceptions;
 using SalesApp.Infraestructure.Interfaces;
+using SalesApp.Infraestructure.Models;
 
 namespace SalesApp.Infraestructure.Dao
 {
@@ -18,6 +20,23 @@ namespace SalesApp.Infraestructure.Dao
             this._saleContext = saleContext;
             this._logger = logger;
             this._configuration = configuration;
+        }
+
+        public async Task<List<ProductoCategoria>> GetProductByCategory(int categoriaId)
+        {
+            List<ProductoCategoria> productosCategoria = await (from p in _saleContext.Producto
+                                              join c in _saleContext.Categoria on p.IdCategoria equals c.Id
+                                              where !p.Eliminado && !c.Eliminado && p.IdCategoria == categoriaId
+                                              select new ProductoCategoria()
+                                              {
+                                                  Id = p.Id,
+                                                  CodigoBarra = p.CodigoBarra,
+                                                  Marca = p.Marca,
+                                                  Stock = p.Stock,
+                                                  NombreCategoria = c.Descripcion
+                                              }).ToListAsync();
+
+            return productosCategoria;
         }
 
         public override List<Producto> GetAll()

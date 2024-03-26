@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Sales.Api.Models.Venta;
+using SalesApp.AppServices.Contracts;
 using SalesApp.Infraestructure.Core;
 using SalesApp.Infraestructure.Interfaces;
 
@@ -10,9 +11,22 @@ namespace Sales.Api.Controllers
     public class VentaController : ControllerBase
     {
         private readonly IVentaDb _ventaDb;
-        public VentaController(IVentaDb ventaDb)
+        private readonly IVentaService _ventaService;
+        public VentaController(IVentaDb ventaDb, IVentaService ventaService)
         {
             this._ventaDb = ventaDb;
+            this._ventaService = ventaService;
+        }
+
+        [HttpGet("GetVentasByUsuarioId")]
+        public async Task<IActionResult> GetVentasByUsuarioId(int usuarioId)
+        {
+            var result = await this._ventaService.GetVentasByUsuario(usuarioId);
+
+            if (!result.Success)
+                return BadRequest(result);
+
+            return Ok(result);
         }
 
         [HttpGet("GetVentas")]

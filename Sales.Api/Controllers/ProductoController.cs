@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Sales.Api.Models.Producto;
+using SalesApp.AppServices.Contracts;
 using SalesApp.Infraestructure.Core;
 using SalesApp.Infraestructure.Interfaces;
 
@@ -10,15 +11,28 @@ namespace Sales.Api.Controllers
     public class ProductoController : ControllerBase
     {
         private readonly IProductoDb _productoDb;
-        public ProductoController(IProductoDb productoDb)
+        private readonly IProductService _productoService;
+        public ProductoController(IProductoDb productoDb, IProductService productoService)
         {
             this._productoDb = productoDb;
+            this._productoService = productoService;
         }
 
         [HttpGet("GetProductos")]
         public IActionResult GetProductos()
         {
             return Ok(this._productoDb.GetAll());
+        }
+
+        [HttpGet("GetProductosByCategoria")]
+        public async Task<IActionResult> GetProductsByCategoria(int categoriaId)
+        {
+            var result = await this._productoService.GetProductByCategory(categoriaId);
+            
+            if (!result.Success)
+                return BadRequest(result);
+
+            return Ok(result);
         }
 
         [HttpPost("Save")]

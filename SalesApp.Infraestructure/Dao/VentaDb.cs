@@ -1,10 +1,12 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using SalesApp.Domain.Entities;
 using SalesApp.Infraestructure.Context;
 using SalesApp.Infraestructure.Core;
 using SalesApp.Infraestructure.Exceptions;
 using SalesApp.Infraestructure.Interfaces;
+using SalesApp.Infraestructure.Models;
 
 namespace SalesApp.Infraestructure.Dao
 {
@@ -18,6 +20,22 @@ namespace SalesApp.Infraestructure.Dao
             this._saleContext = saleContext;
             this._logger = logger;
             this._configuration = configuration;
+        }
+
+        public async Task<List<VentaUsuario>> GetVentaUsuarios(int usuarioId)
+        {
+            List<VentaUsuario> ventaUsuarios = await (from u in _saleContext.Usuario
+                                                      join v in _saleContext.Venta on u.Id equals v.IdUsuario into uv
+                                                      from subV in uv.DefaultIfEmpty()
+                                                      where !u.Eliminado && u.Id == usuarioId
+                                                      group subV by u.Nombre into g
+                                                      select new VentaUsuario
+                                                      {
+                                                          Vendedor = g.Key,
+                                                          VentasRealizadas = g.Count(v => v != null)
+                                                      }).ToListAsync();
+
+            return ventaUsuarios;
         }
 
         public override DataResult Save(Venta entity)
