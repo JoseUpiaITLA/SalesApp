@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Sales.Api.Models.Venta;
 using SalesApp.AppServices.Contracts;
 using SalesApp.Infraestructure.Core;
 using SalesApp.Infraestructure.Interfaces;
+using SalesApp.Infraestructure.Models.Venta;
 
 namespace Sales.Api.Controllers
 {
@@ -59,7 +59,7 @@ namespace Sales.Api.Controllers
         {
             DataResult result = this._ventaDb.Update(new SalesApp.Domain.Entities.Venta
             {
-                Id = model.Id,
+                Id = model.id,
                 NumeroVenta = model.NumeroVenta,
                 IdTipoDocumentoVenta = model.IdTipoDocumentoVenta,
                 IdUsuario = model.IdUsuario,

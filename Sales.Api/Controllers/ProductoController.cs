@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Sales.Api.Models.Producto;
 using SalesApp.AppServices.Contracts;
 using SalesApp.Infraestructure.Core;
 using SalesApp.Infraestructure.Interfaces;
+using SalesApp.Infraestructure.Models.Producto;
 
 namespace Sales.Api.Controllers
 {
@@ -60,7 +60,7 @@ namespace Sales.Api.Controllers
         {
             DataResult result = this._productoDb.Update(new SalesApp.Domain.Entities.Producto
             {
-                Id = model.Id,
+                Id = model.id,
                 CodigoBarra = model.CodigoBarra,
                 Marca = model.Marca,
                 Descripcion = model.Descripcion,

@@ -1,6 +1,6 @@
 ﻿using SalesApp.Domain.Entities;
 using SalesApp.Infraestructure.Core;
-using SalesApp.Infraestructure.Models;
+using SalesApp.Infraestructure.Models.Producto;
 
 namespace SalesApp.Infraestructure.Interfaces
 {

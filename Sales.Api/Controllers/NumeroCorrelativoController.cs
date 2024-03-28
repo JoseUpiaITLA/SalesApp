@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Sales.Api.Models.NumeroCorrelativo;
 using SalesApp.Infraestructure.Core;
 using SalesApp.Infraestructure.Interfaces;
+using SalesApp.Infraestructure.Models.NumeroCorrelativo;
 
 namespace Sales.Api.Controllers
 {
@@ -39,7 +39,7 @@ namespace Sales.Api.Controllers
         {
             DataResult result = this._numeroCorrelativoDb.Update(new SalesApp.Domain.Entities.NumeroCorrelativo
             {
-                Id = model.Id,
+                Id = model.id,
                 UltimoNumero = model.UltimoNumero,
                 CantidadDigitos = model.CantidadDigitos,
                 Gestion = model.Gestion,

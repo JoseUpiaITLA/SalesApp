@@ -6,7 +6,7 @@ using SalesApp.Infraestructure.Context;
 using SalesApp.Infraestructure.Core;
 using SalesApp.Infraestructure.Exceptions;
 using SalesApp.Infraestructure.Interfaces;
-using SalesApp.Infraestructure.Models;
+using SalesApp.Infraestructure.Models.Venta;
 
 namespace SalesApp.Infraestructure.Dao
 {
@@ -34,7 +34,6 @@ namespace SalesApp.Infraestructure.Dao
                                                           Vendedor = g.Key,
                                                           VentasRealizadas = g.Count(v => v != null)
                                                       }).ToListAsync();
-
             return ventaUsuarios;
         }
 

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Sales.Api.Models.RolMenu;
 using SalesApp.Infraestructure.Core;
 using SalesApp.Infraestructure.Interfaces;
+using SalesApp.Infraestructure.Models.RolMenu;
 
 namespace Sales.Api.Controllers
 {
@@ -26,7 +26,7 @@ namespace Sales.Api.Controllers
         {
             DataResult result = this._rolMenuDb.Save(new SalesApp.Domain.Entities.RolMenu
             {
-                IdRol = model.Id,
+                IdRol = model.id,
                 IdMenu = model.IdMenu,
                 EsActivo = model.EsActivo,
                 FechaRegistro = model.FechaRegistro,
@@ -40,7 +40,7 @@ namespace Sales.Api.Controllers
         {
             DataResult result = this._rolMenuDb.Update(new SalesApp.Domain.Entities.RolMenu
             {
-                Id = model.Id,
+                Id = model.id,
                 IdRol = model.IdRol,
                 IdMenu = model.IdMenu,
                 EsActivo = model.EsActivo,

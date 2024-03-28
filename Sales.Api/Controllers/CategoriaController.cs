@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Sales.Api.Models.Categoria;
 using SalesApp.Infraestructure.Core;
 using SalesApp.Infraestructure.Interfaces;
+using SalesApp.Infraestructure.Models.Categoria;
 
 namespace Sales.Api.Controllers
 {
@@ -39,7 +39,7 @@ namespace Sales.Api.Controllers
         {
             DataResult result = this._categoriaDb.Update(new SalesApp.Domain.Entities.Categoria
             {
-                Id = updateModel.Id,
+                Id = updateModel.id,
                 Descripcion = updateModel.Descripcion,
                 EsActivo = updateModel.EsActivo,
                 FechaMod = updateModel.FechaMod,

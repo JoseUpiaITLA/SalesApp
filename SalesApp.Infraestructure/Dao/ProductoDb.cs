@@ -6,7 +6,7 @@ using SalesApp.Infraestructure.Context;
 using SalesApp.Infraestructure.Core;
 using SalesApp.Infraestructure.Exceptions;
 using SalesApp.Infraestructure.Interfaces;
-using SalesApp.Infraestructure.Models;
+using SalesApp.Infraestructure.Models.Producto;
 
 namespace SalesApp.Infraestructure.Dao
 {
@@ -29,7 +29,7 @@ namespace SalesApp.Infraestructure.Dao
                                               where !p.Eliminado && !c.Eliminado && p.IdCategoria == categoriaId
                                               select new ProductoCategoria()
                                               {
-                                                  Id = p.Id,
+                                                  id = p.Id,
                                                   CodigoBarra = p.CodigoBarra,
                                                   Marca = p.Marca,
                                                   Stock = p.Stock,

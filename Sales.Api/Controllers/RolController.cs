@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Sales.Api.Models.Rol;
 using SalesApp.Infraestructure.Core;
 using SalesApp.Infraestructure.Interfaces;
+using SalesApp.Infraestructure.Models.Rol;
 
 namespace Sales.Api.Controllers
 {
@@ -39,7 +39,7 @@ namespace Sales.Api.Controllers
         {
             DataResult result = this._rolDb.Update(new SalesApp.Domain.Entities.Rol
             {
-                Id = model.Id,
+                Id = model. id,
                 Descripcion = model.Descripcion,
                 EsActivo = model.EsActivo,
                 FechaMod = model.FechaMod,

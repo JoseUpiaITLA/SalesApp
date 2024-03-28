@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Sales.Api.Models.TipoDocumentoVenta;
 using SalesApp.Infraestructure.Core;
 using SalesApp.Infraestructure.Interfaces;
+using SalesApp.Infraestructure.Models.TipoDocumentoVenta;
 
 namespace Sales.Api.Controllers
 {
@@ -39,7 +39,7 @@ namespace Sales.Api.Controllers
         {
             DataResult result = this._tipoDocumentoVentaDb.Update(new SalesApp.Domain.Entities.TipoDocumentoVenta
             {
-                Id = model.Id,
+                Id = model.id,
                 Descripcion = model.Descripcion,
                 EsActivo = model.EsActivo,
                 FechaMod = model.FechaMod,

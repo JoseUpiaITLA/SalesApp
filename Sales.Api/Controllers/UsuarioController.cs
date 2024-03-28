@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Sales.Api.Models.Usuario;
 using SalesApp.Infraestructure.Core;
 using SalesApp.Infraestructure.Interfaces;
+using SalesApp.Infraestructure.Models.Usuario;
 
 namespace Sales.Api.Controllers
 {
@@ -45,7 +45,7 @@ namespace Sales.Api.Controllers
         {
             DataResult result = this._usuarioDb.Update(new SalesApp.Domain.Entities.Usuario
             {
-                Id = model.Id,
+                Id = model.id,
                 Nombre = model.Nombre,
                 Correo = model.Correo,
                 Telefono = model.Telefono,

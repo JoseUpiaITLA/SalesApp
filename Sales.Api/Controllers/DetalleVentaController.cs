@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Sales.Api.Models.DetalleVenta;
 using SalesApp.Infraestructure.Core;
 using SalesApp.Infraestructure.Interfaces;
+using SalesApp.Infraestructure.Models.DetalleVenta;
 
 namespace Sales.Api.Controllers
 {
@@ -43,7 +43,7 @@ namespace Sales.Api.Controllers
         {
             DataResult result = this._detalleVentaDb.Update(new SalesApp.Domain.Entities.DetalleVenta
             {
-                Id = model.Id,
+                Id = model.id,
                 IdVenta = model.IdVenta,
                 IdProducto = model.IdProducto,
                 MarcaProducto = model.MarcaProducto,

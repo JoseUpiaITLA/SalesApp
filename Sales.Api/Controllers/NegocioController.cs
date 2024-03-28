@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Sales.Api.Models.Negocio;
 using SalesApp.Infraestructure.Core;
 using SalesApp.Infraestructure.Interfaces;
+using SalesApp.Infraestructure.Models.Negocio;
 
 namespace Sales.Api.Controllers
 {
@@ -21,20 +21,26 @@ namespace Sales.Api.Controllers
             return Ok(this._negocioDb.GetAll());
         }
 
+        [HttpGet("GetNegocioById")]
+        public IActionResult GetNegocioById(int id)
+        {
+            return Ok(this._negocioDb.GetById(id));
+        }
+
         [HttpPost("Save")]
         public IActionResult Save(NegocioCreateModal model)
         {
             DataResult result = this._negocioDb.Save(new SalesApp.Domain.Entities.Negocio
             {
-                UrlLogo = model.UrlLogo,
-                NombreLogo = model.NombreLogo,
-                NumeroDocumento = model.NumeroDocumento,
-                Nombre = model.Nombre,
-                Correo = model.Correo,
-                Direccion = model.Direccion,
-                Telefono = model.Telefono,
-                PorcentajeImpuesto = model.PorcentajeImpuesto,
-                SimboloMoneda = model.SimboloMoneda,
+                UrlLogo = model.urlLogo,
+                NombreLogo = model.nombreLogo,
+                NumeroDocumento = model.numeroDocumento,
+                Nombre = model.nombre,
+                Correo = model.correo,
+                Direccion = model.direccion,
+                Telefono = model.telefono,
+                PorcentajeImpuesto = model.porcentajeImpuesto,
+                SimboloMoneda = model.simboloMoneda,
                 IdUsuarioCreacion = model.IdUsuarioCreacion,
                 FechaRegistro = model.FechaRegistro
             });
@@ -46,16 +52,16 @@ namespace Sales.Api.Controllers
         {
             DataResult result = this._negocioDb.Update(new SalesApp.Domain.Entities.Negocio
             {
-                Id = model.Id,
-                UrlLogo = model.UrlLogo,
-                NombreLogo = model.NombreLogo,
-                NumeroDocumento = model.NumeroDocumento,
-                Nombre = model.Nombre,
-                Correo = model.Correo,
-                Direccion = model.Direccion,
-                Telefono = model.Telefono,
-                PorcentajeImpuesto = model.PorcentajeImpuesto,
-                SimboloMoneda = model.SimboloMoneda,
+                Id = model.id,
+                UrlLogo = model.urlLogo,
+                NombreLogo = model.nombreLogo,
+                NumeroDocumento = model.numeroDocumento,
+                Nombre = model.nombre,
+                Correo = model.correo,
+                Direccion = model.direccion,
+                Telefono = model.telefono,
+                PorcentajeImpuesto = model.porcentajeImpuesto,
+                SimboloMoneda = model.simboloMoneda,
                 IdUsuarioMod = model.IdUsuarioMod,
                 FechaMod = model.FechaMod
             });

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Sales.Api.Models.Menu;
 using SalesApp.Infraestructure.Core;
 using SalesApp.Infraestructure.Interfaces;
+using SalesApp.Infraestructure.Models.Menu;
 
 namespace Sales.Api.Controllers
 {
@@ -43,7 +43,7 @@ namespace Sales.Api.Controllers
         {
             DataResult result = this._menuDb.Update(new SalesApp.Domain.Entities.Menu
             {
-                Id = model.Id,
+                Id = model.id,
                 Descripcion = model.Descripcion,
                 IdMenuPadre = model.IdMenuPadre,
                 Icono = model.Icono,
