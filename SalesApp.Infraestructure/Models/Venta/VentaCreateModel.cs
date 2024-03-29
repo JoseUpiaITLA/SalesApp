@@ -2,7 +2,7 @@
 {
     public class VentaCreateModel : VentaBaseModel
     {
-        public DateTime FechaRegistro { get; set; }
-        public int IdUsuarioCreacion { get; set; }
+        public DateTime fechaRegistro { get; set; }
+        public int idUsuarioCreacion { get; set; }
     }
 }

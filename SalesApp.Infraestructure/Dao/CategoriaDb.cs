@@ -22,7 +22,7 @@ namespace SalesApp.Infraestructure.Dao
 
         public override List<Categoria> GetAll()
         {
-            return base.GetEntitiesWithFilters(e => !e.Eliminado);
+            return base.GetEntitiesWithFilters(e => !e.Eliminado && e.EsActivo);
         }
 
         public override DataResult Save(Categoria entity)

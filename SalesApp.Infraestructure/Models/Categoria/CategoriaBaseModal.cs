@@ -2,7 +2,7 @@
 {
     public class CategoriaBaseModal : BaseModel
     {
-        public string? Descripcion { get; set; }
-        public bool EsActivo { get; set; }
+        public string? descripcion { get; set; }
+        public bool esActivo { get; set; }
     }
 }

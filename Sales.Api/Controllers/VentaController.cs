@@ -2,6 +2,7 @@
 using SalesApp.AppServices.Contracts;
 using SalesApp.Infraestructure.Core;
 using SalesApp.Infraestructure.Interfaces;
+using SalesApp.Infraestructure.Models.Response;
 using SalesApp.Infraestructure.Models.Venta;
 
 namespace Sales.Api.Controllers
@@ -29,6 +30,12 @@ namespace Sales.Api.Controllers
             return Ok(result);
         }
 
+        [HttpGet("GetVentaById")]
+        public IActionResult GetVentas(int id)
+        {
+            return Ok(this._ventaDb.GetById(id));
+        }
+
         [HttpGet("GetVentas")]
         public IActionResult GetVentas()
         {
@@ -38,18 +45,18 @@ namespace Sales.Api.Controllers
         [HttpPost("Save")]
         public IActionResult Save(VentaCreateModel model)
         {
-            DataResult result = this._ventaDb.Save(new SalesApp.Domain.Entities.Venta
+            ApiResponse<SalesApp.Domain.Entities.Venta> result = this._ventaDb.SaveVenta(new SalesApp.Domain.Entities.Venta
             {
-                NumeroVenta = model.NumeroVenta,
-                IdTipoDocumentoVenta = model.IdTipoDocumentoVenta,
-                IdUsuario = model.IdUsuario,
-                CocumentoCliente = model.CocumentoCliente,
-                NombreCliente = model.NombreCliente,
-                SubTotal = model.SubTotal,
-                ImpuestoTotal = model.ImpuestoTotal,
-                Total = model.Total,
-                FechaRegistro = model.FechaRegistro,
-                IdUsuarioCreacion = model.IdUsuarioCreacion
+                NumeroVenta = model.numeroVenta,
+                IdTipoDocumentoVenta = model.idTipoDocumentoVenta,
+                IdUsuario = model.idUsuario,
+                CocumentoCliente = model.cocumentoCliente,
+                NombreCliente = model.nombreCliente,
+                SubTotal = model.subTotal,
+                ImpuestoTotal = model.impuestoTotal,
+                Total = model.total,
+                FechaRegistro = model.fechaRegistro,
+                IdUsuarioCreacion = model.idUsuarioCreacion
             });
             return Ok(result);
         }
@@ -60,14 +67,14 @@ namespace Sales.Api.Controllers
             DataResult result = this._ventaDb.Update(new SalesApp.Domain.Entities.Venta
             {
                 Id = model.id,
-                NumeroVenta = model.NumeroVenta,
-                IdTipoDocumentoVenta = model.IdTipoDocumentoVenta,
-                IdUsuario = model.IdUsuario,
-                CocumentoCliente = model.CocumentoCliente,
-                NombreCliente = model.NombreCliente,
-                SubTotal = model.SubTotal,
-                ImpuestoTotal = model.ImpuestoTotal,
-                Total = model.Total
+                NumeroVenta = model.numeroVenta,
+                IdTipoDocumentoVenta = model.idTipoDocumentoVenta,
+                IdUsuario = model.idUsuario,
+                CocumentoCliente = model.cocumentoCliente,
+                NombreCliente = model.nombreCliente,
+                SubTotal = model.subTotal,
+                ImpuestoTotal = model.impuestoTotal,
+                Total = model.total
             });
             return Ok(result);
         }

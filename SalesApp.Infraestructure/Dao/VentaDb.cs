@@ -6,6 +6,7 @@ using SalesApp.Infraestructure.Context;
 using SalesApp.Infraestructure.Core;
 using SalesApp.Infraestructure.Exceptions;
 using SalesApp.Infraestructure.Interfaces;
+using SalesApp.Infraestructure.Models.Response;
 using SalesApp.Infraestructure.Models.Venta;
 
 namespace SalesApp.Infraestructure.Dao
@@ -22,24 +23,36 @@ namespace SalesApp.Infraestructure.Dao
             this._configuration = configuration;
         }
 
-        public async Task<List<VentaUsuario>> GetVentaUsuarios(int usuarioId)
+        public async Task<VentaUsuario> GetVentaUsuarios(int usuarioId)
         {
-            List<VentaUsuario> ventaUsuarios = await (from u in _saleContext.Usuario
+            VentaUsuario ventaUsuarios = await (from u in _saleContext.Usuario
                                                       join v in _saleContext.Venta on u.Id equals v.IdUsuario into uv
                                                       from subV in uv.DefaultIfEmpty()
                                                       where !u.Eliminado && u.Id == usuarioId
                                                       group subV by u.Nombre into g
                                                       select new VentaUsuario
                                                       {
-                                                          Vendedor = g.Key,
-                                                          VentasRealizadas = g.Count(v => v != null)
-                                                      }).ToListAsync();
+                                                          vendedor = g.Key,
+                                                          ventasRealizadas = g.Count(v => v != null)
+                                                      }).FirstAsync();
             return ventaUsuarios;
         }
 
-        public override DataResult Save(Venta entity)
+        public override List<Venta> GetAll()
         {
-            DataResult result = new DataResult();
+            List<Venta> ventas = _saleContext.Venta.Include(v => v.TipoDocumentoVenta).ToList();
+            return ventas;
+        }
+
+        public override Venta GetById(int id)
+        {
+            Venta venta = _saleContext.Venta.Include(v => v.TipoDocumentoVenta).First(e => e.Id.Equals(id));
+            return venta;
+        }
+
+        public ApiResponse<Venta> SaveVenta(Venta entity)
+        {
+            ApiResponse<Venta> result = new ApiResponse<Venta>();
             try
             {
                 if (this.Exists(e => e.Id == entity.Id))
@@ -50,10 +63,11 @@ namespace SalesApp.Infraestructure.Dao
             }
             catch (Exception ex)
             {
-                result.Success = false;
-                result.Message = $"Ocurrió el siguiente error: {ex.Message}";
-                this._logger.LogError(result.Message, ex.ToString());
+                result.success = false;
+                result.message = $"Ocurrió el siguiente error: {ex.Message}";
+                this._logger.LogError(result.message, ex.ToString());
             }
+            result.data = entity;
             return result;
         }
 

@@ -3,8 +3,8 @@ namespace SalesApp.Infraestructure.Models.Response
 {
     public class ApiResponse<TModel>
     {
-        public string? Message { get; set; }
-        public bool Success { get; set; } = true;
-        public TModel? Data { get; set; }
+        public string? message { get; set; }
+        public bool success { get; set; } = true;
+        public TModel? data { get; set; }
     }
 }

@@ -2,7 +2,7 @@
 {
     public class TipoDocumentoVentaUpdateModel : TipoDocumentoVentaBaseModel
     {
-        public DateTime? FechaMod { get; set; }
-        public int? IdUsuarioMod { get; set; }
+        public DateTime? fechaMod { get; set; }
+        public int? idUsuarioMod { get; set; }
     }
 }

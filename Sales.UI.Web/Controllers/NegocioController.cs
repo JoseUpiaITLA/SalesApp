@@ -17,13 +17,13 @@ namespace Sales.UI.Web.Controllers
         {
             var result = await this._negocioService.GetNegocios();
 
-            if (!result.Success)
+            if (!result.success)
             {
-                ViewBag.Message = result.Message;
+                ViewBag.Message = result.message;
                 return View();
             }
 
-            List<NegocioBaseModal> listNegocios = result.Data;
+            List<NegocioBaseModal> listNegocios = result.data;
             return View(listNegocios);
         }
 
@@ -39,31 +39,40 @@ namespace Sales.UI.Web.Controllers
             negocioCreateModal.FechaRegistro = DateTime.Now;
 
             var result = await _negocioService.PostNegocio(negocioCreateModal);
-            if (!result.Success)
+            if (!result.success)
             {
-                ViewBag.Message = result.Message;
+                ViewBag.Message = result.message;
                 return View();
             }
 
             return Redirect("~/Negocio/Index");
         }
 
-        public IActionResult Details()
+        public async Task<IActionResult> Details(int id)
         {
-            return View();
+            var result = await _negocioService.GetNegocioById(id);
+            if (!result.success)
+            {
+                ViewBag.Message = result.message;
+                return View();
+            }
+
+            NegocioBaseModal negocioBaseModal = result.data;
+            return View(negocioBaseModal);
+
         }
 
         public async Task<IActionResult> Edict(int id)
         {
             var result = await _negocioService.GetNegocioById(id);
 
-            if (!result.Success)
+            if (!result.success)
             {
-                ViewBag.Message = result.Message;
+                ViewBag.Message = result.message;
                 return View();
             }
 
-            NegocioBaseModal listNegocios = result.Data;
+            NegocioBaseModal listNegocios = result.data;
             return View(listNegocios);
         }
 
@@ -74,9 +83,9 @@ namespace Sales.UI.Web.Controllers
             negocioUpdateModal.FechaMod = DateTime.Now;
 
             var result = await _negocioService.PutNegocio(negocioUpdateModal);
-            if (!result.Success)
+            if (!result.success)
             {
-                ViewBag.Message = result.Message;
+                ViewBag.Message = result.message;
                 return View();
             }
 

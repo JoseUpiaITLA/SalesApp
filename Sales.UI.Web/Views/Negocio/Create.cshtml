@@ -4,9 +4,13 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1>Nuevo Negocio</h1>
 
-<h4>NegocioCreateModal</h4>
+@if (ViewBag.Message is not null)
+{
+    <span class="alert-danger">@ViewBag.Message</span>
+}
+
 <hr />
 <div class="row">
     <div class="col-md-4">

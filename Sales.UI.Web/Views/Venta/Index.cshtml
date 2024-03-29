@@ -1,4 +1,60 @@
-﻿@*
-*@
+﻿@model IEnumerable<SalesApp.Infraestructure.Models.Venta.VentaBaseModel>
+
 @{
+    ViewData["Title"] = "Index";
 }
+
+<h1>Ventas</h1>
+
+@if (ViewBag.Message is not null)
+{
+    <span class="alert-danger">@ViewBag.Message</span>
+}
+
+<p>
+    <a class="btn btn-outline-primary" asp-action="Create">Nueva Venta</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Numero Venta</th>
+            <th>Tipo Documento Venta</th>
+            <th>Documento Cliente</th>
+            <th>Nombre Cliente</th>
+            <th>Sub Total</th>
+            <th>Impuesto Total</th>
+            <th>Total</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.numeroVenta)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tipoDocumentoVenta.descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cocumentoCliente)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nombreCliente)
+                </td>
+                <td>
+                    $@Html.DisplayFor(modelItem => item.subTotal)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.impuestoTotal)
+                </td>
+                <td>
+                    $@Html.DisplayFor(modelItem => item.total)
+                </td>
+                <td>
+                    <a class="btn btn-outline-dark" href="@Url.Action("Details", "Venta")">Ver Detalle</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

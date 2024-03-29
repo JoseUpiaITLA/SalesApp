@@ -2,7 +2,7 @@
 {
     public class VentaUsuario
     {
-        public string? Vendedor { get; set; }
-        public int VentasRealizadas { get; set; }
+        public string? vendedor { get; set; }
+        public int ventasRealizadas { get; set; }
     }
 }

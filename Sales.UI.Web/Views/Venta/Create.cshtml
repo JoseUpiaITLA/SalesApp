@@ -1,4 +1,158 @@
-﻿@*
-*@
+﻿@model CreateVentaModel
 @{
+    ViewData["Title"] = "Crear Venta";
+
 }
+
+<h1>@ViewData["Title"]</h1>
+<form asp-action="Create">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row">
+        <div class="col-4">
+            <h4>Datos de Venta</h4>
+            <div class="form-group">
+                <label asp-for="Venta.numeroVenta" class="control-label">Numero Venta</label>
+                <input asp-for="Venta.numeroVenta" class="form-control" />
+                <span asp-validation-for="Venta.numeroVenta" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Venta.idTipoDocumentoVenta">Tipo de Documento de Venta:</label>
+                <select class="form-control" asp-for="Venta.idTipoDocumentoVenta" asp-items="@(new SelectList(Model.TipoDocumentoVenta, "id", "descripcion"))">
+                    <option value="">Seleccionar Tipo de Documento</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Venta.cocumentoCliente" class="control-label">Documento del Cliente</label>
+                <input asp-for="Venta.cocumentoCliente" class="form-control" />
+                <span asp-validation-for="Venta.cocumentoCliente" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Venta.nombreCliente" class="control-label">Nombre Cliente</label>
+                <input asp-for="Venta.nombreCliente" class="form-control" />
+                <span asp-validation-for="Venta.nombreCliente" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Venta.subTotal" class="control-label">Sub Total</label>
+                <input asp-for="Venta.subTotal" class="form-control" />
+                <span asp-validation-for="Venta.subTotal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Venta.impuestoTotal" class="control-label">Impuestos Total</label>
+                <input asp-for="Venta.impuestoTotal" class="form-control" />
+                <span asp-validation-for="Venta.impuestoTotal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Venta.total" class="control-label">Total</label>
+                <input asp-for="Venta.total" class="form-control" />
+                <span asp-validation-for="Venta.total" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-4">
+            <h4>Detalle de la venta</h4>
+            <div class="form-group">
+                <div class="form-group">
+                    <label hidden asp-for="DetalleVenta.IdProducto" class="control-label">Id del Producto</label>
+                    <input hidden asp-for="DetalleVenta.IdProducto" class="form-control" />
+                    <span asp-validation-for="DetalleVenta.IdProducto" class="text-danger"></span>
+                </div>
+                <label>Categoria del producto:</label>
+                <select class="form-control" asp-items="@(new SelectList(Model.Categoria, "id", "descripcion"))" onchange="GetProductoByCategoria(this)">
+                    <option value="">Seleccionar Tipo de Documento</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="selectProductos">Productos:</label>
+                <select id="selectProductos" asp-for="DetalleVenta.IdProducto" class="form-control" onchange="GetProductoSeleccionado(this)">
+                    <option value="">Seleccionar Producto</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="DetalleVenta.MarcaProducto" class="control-label">Marca del Producto</label>
+                <input asp-for="DetalleVenta.MarcaProducto" class="form-control" />
+                <span asp-validation-for="DetalleVenta.MarcaProducto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DetalleVenta.DescripcionProducto" class="control-label">Descripción del Producto</label>
+                <input asp-for="DetalleVenta.DescripcionProducto" class="form-control" />
+                <span asp-validation-for="DetalleVenta.DescripcionProducto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DetalleVenta.CategoriaProducto" class="control-label">Categoria del Producto</label>
+                <input asp-for="DetalleVenta.CategoriaProducto" class="form-control" />
+                <span asp-validation-for="DetalleVenta.CategoriaProducto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DetalleVenta.Cantidad" class="control-label"></label>
+                <input asp-for="DetalleVenta.Cantidad" class="form-control" />
+                <span asp-validation-for="DetalleVenta.Cantidad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DetalleVenta.Precio" class="control-label"></label>
+                <input asp-for="DetalleVenta.Precio" class="form-control"/>
+                <span asp-validation-for="DetalleVenta.Precio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DetalleVenta.Total" class="control-label"></label>
+                <input asp-for="DetalleVenta.Total" class="form-control" />
+                <span asp-validation-for="DetalleVenta.Total" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Crear Venta</button>
+ </form>
+<div>
+    <a class="btn btn-outline-dark mt-3" asp-action="Index">Back to List</a>
+</div>
+
+
+
+<script>
+    var productos;
+    function GetProductoByCategoria(categoriaSeleccionado) {
+        if (!categoriaSeleccionado.value) {
+            console.log("Hola Mundo");
+            $('#selectProductos').empty();
+        } else{
+            $.ajax({
+                url: 'https://localhost:7162/api/Producto/GetProductosByCategoria/?categoriaId=' + categoriaSeleccionado.value,
+                type: 'GET',
+                success: function (response) {
+                    console.log('Productos de la categoría seleccionada:', response);
+
+                    $('#selectProductos').empty();
+                    productos = response.data;
+
+                    $('#selectProductos').append($('<option>', {
+                        value: "",
+                        text: "Seleccionar Producto"
+                    }));
+                    response.data.forEach(function (producto) {
+                        $('#selectProductos').append($('<option>', {
+                            value: producto.id,
+                            text: producto.descripcionProducto
+                        }));
+                    });
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.error('Error al obtener productos:', errorThrown);
+                }
+            });
+        }
+    }
+
+    function GetProductoSeleccionado(productoSeleccionado) {
+        let producto = productos.find(p => p.id == productoSeleccionado.value);
+
+        const marcaProducto = document.getElementById('DetalleVenta_MarcaProducto');
+        const descripcionProducto = document.getElementById('DetalleVenta_DescripcionProducto');
+        const categoriaProducto = document.getElementById('DetalleVenta_CategoriaProducto');
+        const precioProducto = document.getElementById('DetalleVenta_Precio');
+        const idProducto = document.getElementById('DetalleVenta_IdProducto');
+
+        marcaProducto.value = producto.marca;
+        descripcionProducto.value = producto.descripcionProducto;
+        categoriaProducto.value = producto.nombreCategoria;
+        precioProducto.value = producto.precio;
+        idProducto.value = producto.id
+    }
+</script>

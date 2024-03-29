@@ -30,10 +30,12 @@ namespace SalesApp.Infraestructure.Dao
                                               select new ProductoCategoria()
                                               {
                                                   id = p.Id,
-                                                  CodigoBarra = p.CodigoBarra,
-                                                  Marca = p.Marca,
-                                                  Stock = p.Stock,
-                                                  NombreCategoria = c.Descripcion
+                                                  codigoBarra = p.CodigoBarra,
+                                                  marca = p.Marca,
+                                                  stock = p.Stock,
+                                                  nombreCategoria = c.Descripcion,
+                                                  descripcionProducto = p.Descripcion,
+                                                  precio = p.Precio
                                               }).ToListAsync();
 
             return productosCategoria;

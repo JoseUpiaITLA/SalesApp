@@ -26,8 +26,8 @@ namespace Sales.Api.Controllers
         {
             DataResult result = this._categoriaDb.Save(new SalesApp.Domain.Entities.Categoria
             { 
-                Descripcion = createModel.Descripcion,
-                EsActivo = createModel.EsActivo,
+                Descripcion = createModel.descripcion,
+                EsActivo = createModel.esActivo,
                 FechaRegistro = createModel.FechaRegistro,
                 IdUsuarioCreacion = createModel.IdUsuarioCreacion,
             });
@@ -40,8 +40,8 @@ namespace Sales.Api.Controllers
             DataResult result = this._categoriaDb.Update(new SalesApp.Domain.Entities.Categoria
             {
                 Id = updateModel.id,
-                Descripcion = updateModel.Descripcion,
-                EsActivo = updateModel.EsActivo,
+                Descripcion = updateModel.descripcion,
+                EsActivo = updateModel.esActivo,
                 FechaMod = updateModel.FechaMod,
                 IdUsuarioMod = updateModel.IdUsuarioMod
             });

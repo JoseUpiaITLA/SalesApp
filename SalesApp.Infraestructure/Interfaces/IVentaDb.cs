@@ -1,11 +1,13 @@
 ﻿using SalesApp.Domain.Entities;
 using SalesApp.Infraestructure.Core;
+using SalesApp.Infraestructure.Models.Response;
 using SalesApp.Infraestructure.Models.Venta;
 
 namespace SalesApp.Infraestructure.Interfaces
 {
     public interface IVentaDb : IDaoBase<Venta, int>
     {
-        public Task<List<VentaUsuario>> GetVentaUsuarios(int usuarioId);
+        Task<VentaUsuario> GetVentaUsuarios(int usuarioId);
+        ApiResponse<Venta> SaveVenta(Venta venta);
     }
 }

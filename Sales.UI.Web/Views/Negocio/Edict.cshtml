@@ -6,7 +6,11 @@
 
 <h1>Edict</h1>
 
-<h4>NegocioUpdateModal</h4>
+@if (ViewBag.Message is not null)
+{
+    <span class="alert-danger">@ViewBag.Message</span>
+}
+
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -70,7 +74,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-outline-dark" asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

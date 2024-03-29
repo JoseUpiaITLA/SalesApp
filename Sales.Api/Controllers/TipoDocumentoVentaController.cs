@@ -26,10 +26,10 @@ namespace Sales.Api.Controllers
         {
             DataResult result = this._tipoDocumentoVentaDb.Save(new SalesApp.Domain.Entities.TipoDocumentoVenta
             {
-                Descripcion = model.Descripcion,
-                EsActivo = model.EsActivo,
-                FechaRegistro = model.FechaRegistro,
-                IdUsuarioCreacion = model.IdUsuarioCreacion
+                Descripcion = model.descripcion,
+                EsActivo = model.esActivo,
+                FechaRegistro = model.fechaRegistro,
+                IdUsuarioCreacion = model.idUsuarioCreacion
             });
             return Ok(result);
         }
@@ -40,10 +40,10 @@ namespace Sales.Api.Controllers
             DataResult result = this._tipoDocumentoVentaDb.Update(new SalesApp.Domain.Entities.TipoDocumentoVenta
             {
                 Id = model.id,
-                Descripcion = model.Descripcion,
-                EsActivo = model.EsActivo,
-                FechaMod = model.FechaMod,
-                IdUsuarioMod = model.IdUsuarioMod
+                Descripcion = model.descripcion,
+                EsActivo = model.esActivo,
+                FechaMod = model.fechaMod,
+                IdUsuarioMod = model.idUsuarioMod
             });
             return Ok(result);
         }

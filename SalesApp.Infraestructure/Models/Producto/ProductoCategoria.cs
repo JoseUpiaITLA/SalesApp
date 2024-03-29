@@ -3,9 +3,11 @@ namespace SalesApp.Infraestructure.Models.Producto
 {
     public class ProductoCategoria : BaseModel
     {
-        public string? CodigoBarra { get; set; }
-        public string? Marca { get; set; }
-        public int? Stock { get; set; }
-        public string? NombreCategoria { get; set; }
+        public string? codigoBarra { get; set; }
+        public string? marca { get; set; }
+        public int? stock { get; set; }
+        public string? nombreCategoria { get; set; }
+        public string? descripcionProducto { get; set; }
+        public decimal? precio { get; set; }
     }
 }

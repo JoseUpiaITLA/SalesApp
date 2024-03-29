@@ -2,10 +2,16 @@
 @{
     ViewData["Title"] = "Negocio";
 }
+
+@if (ViewBag.Message is not null)
+{
+    <span class="alert-danger">@ViewBag.Message</span>
+}
+
 <div class="container mt-3">
     <div class="row">
         <div class="col">
-            <a href="@Url.Action("Create", "Negocio")" class="btn btn-primary">Agregar Negocio</a>
+            <a href="@Url.Action("Create", "Negocio")" class="btn btn-outline-primary">Agregar Negocio</a>
         </div>
     </div>
     <div class="row mt-3">
@@ -26,14 +32,14 @@
                     @foreach (var negocio in Model)
                     {
                         <tr>
-                            <td><img src="@negocio.urlLogo" /></td>
+                            <td><img class="img-table" src="@negocio.urlLogo" /></td>
                             <td>@negocio.nombreLogo</td>
                             <td>@negocio.nombre</td>
                             <td>@negocio.correo</td>
                             <td>@negocio.direccion</td>
                             <td>@negocio.telefono</td>
                             <td>
-                                <a class="btn btn-outline-dark" href="@Url.Action("Details", "Negocio")">Ver Detalle</a>
+                                <a class="btn btn-outline-dark" href="@Url.Action("Details", "Negocio", new { id = negocio.id})">Ver Detalle</a>
                                 <a class="btn btn-outline-dark" href="@Url.Action("Edict", "Negocio", new { id = negocio.id})">Editar</a>
                             </td>
                         </tr>
